@@ -1,10 +1,17 @@
 # todos-claude Setup
 
-⚠️ **IMPORTANT: At the very start of each session, before anything else, ask the user which todos space they want to work in. Do this immediately as your first message.**
+⚠️ **IMPORTANT: At the very start of each session, before anything else, ask the user to select a space. Do this immediately as your first message.**
 
+First, check what spaces exist (folders in the current directory). Then ask:
+
+**If spaces exist:**
 ```
-Which todos space would you like to work in? (work, home, life, etc.)
-Or type a new space name to create one.
+Please select space: [list available spaces]
+```
+
+**If no spaces exist:**
+```
+No spaces found. Create one with: /init <space-name> "<description>"
 ```
 
 Once they respond, load that space's `todos.md` into context and proceed.
@@ -23,6 +30,18 @@ This is a personal, Claude-powered todos management system. It supports organizi
 - All commands are documented in `commands.md`
 
 ## Behavioral Rules for Commands
+
+### Command Format
+All commands use the slash format: `/command <args>`
+
+**Inside Claude sessions** (the recommended way):
+```
+/init work "Work tasks"
+/add "Finish report"
+/done 3
+```
+
+These are executed within the Claude session context for this project.
 
 ### Metadata Inference
 When processing the `add <task>` command, intelligently infer metadata from the natural description:
