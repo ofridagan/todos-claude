@@ -1,5 +1,16 @@
 # todos-claude Setup
 
+⚠️ **IMPORTANT: At the very start of each session, before anything else, ask the user which todos space they want to work in. Do this immediately as your first message.**
+
+```
+Which todos space would you like to work in? (work, home, life, etc.)
+Or type a new space name to create one.
+```
+
+Once they respond, load that space's `todos.md` into context and proceed.
+
+---
+
 ## Project Overview
 
 This is a personal, Claude-powered todos management system. It supports organizing tasks across multiple "spaces" (work, home, life, etc.) — each space is a separate folder with its own `todos.md` and `done-todos.md` files.
@@ -10,17 +21,6 @@ This is a personal, Claude-powered todos management system. It supports organizi
 - Tasks are stored as markdown with inferred metadata (deadline, duration, priority, tags)
 - Claude intelligently parses natural language descriptions to extract and structure metadata
 - All commands are documented in `commands.md`
-
-## Session Initialization
-
-**At the start of each session, ask the user which space they want to work in:**
-
-```
-Which todos space would you like to work in? (work, home, life, etc.)
-Or type a new space name to create one.
-```
-
-Once they choose (or if only one exists), load that space's `todos.md` into context.
 
 ## Behavioral Rules for Commands
 
@@ -41,14 +41,14 @@ Tasks in `todos.md` are numbered sequentially (1, 2, 3...) for easy reference wi
 - `start <num>` — marks task as in-progress (✓ or [*] or similar marker)
 - `rm <num>` — removes task (ask for confirmation if not explicitly confirmed)
 
-### Flexible Queries
-Users can ask natural questions like:
-- "Show me urgent tasks"
-- "What's due this week?"
-- "List work tasks"
-- "Show overdue items"
+### Natural Language Commands
+Users may attempt to use natural language to perform actions (e.g., "show me urgent tasks", "what's due today?", "mark task 3 complete").
 
-Claude should parse these intelligently without requiring explicit commands.
+When you detect a natural language command that maps to a built-in slash command, **kindly remind the user about the equivalent slash command**. For example:
+- User: "Show me urgent tasks" → Respond helpfully, then mention: "You can also use `/list` to see all tasks"
+- User: "I finished task 5" → Mark it done, then mention: "Next time, use `/done 5`"
+
+This gently guides users toward the explicit command format without being prescriptive.
 
 ## Reference
 See `commands.md` for the full command reference and examples.
